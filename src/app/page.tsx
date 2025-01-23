@@ -88,9 +88,13 @@ function VideoCard({ title, videoSrc, posterSrc }: VideoCardProps) {
       {isModalOpen && (
         <div 
           className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 backdrop-blur-sm"
-          onClick={() => setIsModalOpen(false)}
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              setIsModalOpen(false);
+            }
+          }}
         >
-          <div className="w-full max-w-4xl p-4 relative">
+          <div className="w-full max-w-4xl p-4 relative" onClick={(e) => e.stopPropagation()}>
             <button 
               onClick={() => setIsModalOpen(false)}
               className="absolute -top-12 right-4 text-white/80 hover:text-white"
@@ -103,6 +107,9 @@ function VideoCard({ title, videoSrc, posterSrc }: VideoCardProps) {
               className="w-full rounded-xl shadow-2xl"
               controls
               autoPlay
+              playsInline
+              controlsList="nodownload"
+              onClick={(e) => e.stopPropagation()}
             >
               <source src={videoSrc} type="video/mp4" />
               Your browser does not support the video tag.
