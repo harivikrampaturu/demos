@@ -15,6 +15,10 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Demos",
   description: "Meeami Demos",
+  icons: {
+    icon: 'https://www.meeamitech.com/favicon.ico',
+    shortcut: 'https://www.meeamitech.com/favicon.ico',
+  },
 };
 
 export default function RootLayout({
