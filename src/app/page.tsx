@@ -4,6 +4,12 @@ import { useState } from "react";
 import { videos } from "../../public/videos/index.js";
 
 export default function Home() {
+  const [selectedLanguage, setSelectedLanguage] = useState('All');
+
+  const filteredVideos = selectedLanguage === 'All' 
+    ? videos 
+    : videos.filter(video => video.language === selectedLanguage);
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 p-8 flex flex-col">
       <main className="container mx-auto flex-grow">
@@ -12,9 +18,21 @@ export default function Home() {
             Demos
           </span>
         </h1>
+
+        <div className="mb-4 flex justify-end">
+          <select 
+            value={selectedLanguage} 
+            onChange={(e) => setSelectedLanguage(e.target.value)} 
+            className="p-2 rounded bg-gray-700 text-white border border-gray-600"
+          >
+            <option value="All">All Languages</option>
+            <option value="English">English</option>
+            <option value="Hindi">Hindi</option>
+          </select>
+        </div>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {videos.map((video) => (
+          {filteredVideos.map((video) => (
             <VideoCard 
               key={video.id}
               title={video.title}
